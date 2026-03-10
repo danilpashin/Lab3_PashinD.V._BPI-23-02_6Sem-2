@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Lab3_PashinD.V._BPI_23_02_6Sem_2.Models.Vegetable>
+<h2>Отсортированные овощи</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

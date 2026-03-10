@@ -1,0 +1,53 @@
+﻿@*Html.ActionLink("Perform Simple Action", "FirstViewMethod", "Vegetables", null, new { @class = "btn btn-primary" })
+    Html.ActionLink("Perform Simple Action", "SecondViewMethod", "Vegetables", null, new { @class = "btn2 btn-primary" })*@
+@{ ViewBag.Title = "Index"; }
+
+<h2>Списки овощей</h2>
+
+<div>
+    <button id="btnFirstList" class="btn btn-primary">Первый список</button>
+    <button id="btnSecondList" class="btn btn-primary">Второй список</button>
+</div>
+
+<div id="resultContainer" style="margin-top: 20px;">
+    <!-- Здесь будет отображаться результат -->
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#btnFirstList").click(function() {
+                $.ajax({
+                    url: '@Url.Action("FirstViewMethod", "Vegetables")',
+                    type: 'GET',
+                    success: function(data) {
+                        $("#resultContainer").html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Статус: " + status);
+                        console.log("Ошибка: " + error);
+                        console.log("Ответ: " + xhr.responseText);
+                        alert("Ошибка при загрузке первого списка: " + error);
+                    }
+                });
+            });
+
+            $("#btnSecondList").click(function() {
+                $.ajax({
+                    url: '@Url.Action("SecondViewMethod", "Vegetables")',
+                    type: 'GET',
+                    success: function(data) {
+                        $("#resultContainer").html(data);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Статус: " + status);
+                        console.log("Ошибка: " + error);
+                        console.log("Ответ: " + xhr.responseText);
+                        alert("Ошибка при загрузке второго списка: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+}
